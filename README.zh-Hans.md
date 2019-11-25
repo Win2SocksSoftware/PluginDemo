@@ -304,7 +304,7 @@ internal PluginClient(IPEndPoint proxyServer, ClientProtocolType type,
     | `offset` | 指示要向 `buffer` 写入数据的位置偏移。 |
     | `count` | 实际写入到 `buffer` 中的数据的字节数。 |
 
-    每当接收到 `TCP` 数据时，此方法将被调用。你应该在此方法中实现对数据解密或反混淆的逻辑。
+    Win2Socks 循环调用此方法。你应该在此方法中通过先前创建的 Socket 实例接收 `TCP` 数据（通常是通过 `TcpClient.GetStream` 获取 `NetworkStream`，然后调用 `NetworkStream.ReadAsync` 方法），然后对数据进行解密或反混淆，再将解密或反混淆后的数据复制到 `buffer` 中。
     
     此方法是一个热路径（会被频繁调用）。因此，如非必要，**不应该** 在此方法中分配缓冲区，应该在类成员变量中分配专门用于 `读` 操作的缓冲区。
 

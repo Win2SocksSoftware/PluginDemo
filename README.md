@@ -304,7 +304,7 @@ internal PluginClient(IPEndPoint proxyServer, ClientProtocolType type,
     | `offset` | Indicates the offset to write data to `buffer`. |
     | `count` | The number of bytes of data actually written to `buffer`. |
 
-    This method will be called whenever `TCP` data is received. You should implement the logic of decrypting or deobfuscating data in this method.
+    Win2Socks calls this method in a loop. You should receive `TCP` data within this method via the previously created `Socket` instance (usually get `NetworkStream` via `TcpClient.GetStream` and then call `NetworkStream.ReadAsync`), then decrypt or deobfuscate the data, and copy the decrypted or deobfuscated data into `buffer`. 
 
     This method is a hot path (which will be called frequently). Therefore, if not necessary, **should not** allocate buffers in this method, you should allocate a buffer dedicated to the `read` operation in the class member variables.
 
