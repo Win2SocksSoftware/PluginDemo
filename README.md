@@ -288,7 +288,7 @@ internal PluginClient(IPEndPoint proxyServer, ClientProtocolType type,
     | `offset` | The offset in `buffer` of the data to be sent. |
     | `count` | The number of bytes of data that need to be sent. |
 
-    This method will be called whenever there is `TCP` data sent. You should implement data encryption or obfuscation logic in this method.
+    This method will be called whenever there is `TCP` data sent. You should implement data encryption or obfuscation logic in this method, then send to proxy server.
 
     This method is a hot path (which will be called frequently). Therefore, if not necessary, **should not** allocate buffers in this method, you should allocate buffers dedicated to `write` operations in class member variables.
 
@@ -324,7 +324,7 @@ internal PluginClient(IPEndPoint proxyServer, ClientProtocolType type,
     | `address` | The real destination address. Usually needs to inform the proxy server of this address. |
     | `port` | The real destination port. Usually needs to inform the proxy server of this port. |
 
-    This method will be called whenever there is `UDP` data sent. You should implement logic for encrypting or confusing `UDP` datagrams in this method.
+    This method will be called whenever there is `UDP` data sent. You should implement logic for encrypting or confusing `UDP` datagrams in this method, then send to proxy server.
 
     Since `UDP` is a connectionless protocol and for performance reasons, Win2Socks does not synchronize the `send` operation of the `UDP` session. Therefore, this method may be called by multiple threads at the same time. If you need to access shared resources (usually member variables of a class) in this method, you need to implement multi-thread synchronization. The usual choice is to use `lock` or use the thread-safe collection class under the [`System.Collections.Concurrent`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.concurrent?view=netframework-4.7.2) namespace.
 
