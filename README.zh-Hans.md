@@ -422,7 +422,7 @@ Win2Socks 在启动的同时加载插件并创建 `IPlugin` 实例，当你想�
 
 将插件所需的 `dll` 以及 [插件参数编辑器](#实现插件参数编辑器) 的 `exe` 文件（如果有的话）一起打包进 `zip` 压缩包文件即可发布给用户。
 
-无需打包 `Win2Socks.Plugin.dll` 和 `System.Composition.AttributedModel.dll`，Win2Socks 本身由包含这两个文件。
+无需打包 `Win2Socks.Plugin.dll` 和 `System.Composition.AttributedModel.dll`，Win2Socks 本身已包含这两个文件。
 
 > 请确保插件的 `dll` 文件位于压缩包的顶层目录中，否则 Win2Socks 将无法加载插件。可参考本储存库的 `PluginDemo.zip` 文件。
 
